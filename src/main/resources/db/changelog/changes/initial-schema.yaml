@@ -1,0 +1,84 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: PeaChack
+      changes:
+        - createTable:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: brand
+                  type: varchar(255)
+              - column:
+                  name: house_number
+                  type: int
+              - column:
+                  name: street
+                  type: varchar(255)
+              - column:
+                  name: city
+                  type: varchar(255)
+              - column:
+                  name: county
+                  type: varchar(255)
+              - column:
+                  name: post_code
+                  type: varchar(255)
+              - column:
+                  name: phone
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: check_in
+                  type: varchar(6)
+              - column:
+                  name: check_out
+                  type: varchar(6)
+        - createTable:
+            tableName: amenity
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: hotel_amenity
+            columns:
+              - column:
+                  name: hotel_id
+                  type: int
+              - column:
+                  name: amenity_id
+                  type: int
+        - addForeignKeyConstraint:
+            baseTableName: hotel_amenity
+            baseColumnNames: hotel_id
+            constraintName: hotel_id
+            referencedTableName: hotel
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: hotel_amenity
+            baseColumnNames: amenity_id
+            constraintName: amenity_id
+            referencedTableName: amenity
+            referencedColumnNames: id
