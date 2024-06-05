@@ -29,7 +29,7 @@ databaseChangeLog:
                   name: city
                   type: varchar(255)
               - column:
-                  name: county
+                  name: country
                   type: varchar(255)
               - column:
                   name: post_code

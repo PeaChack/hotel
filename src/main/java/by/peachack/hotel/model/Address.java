@@ -13,8 +13,8 @@ public class Address {
     private String street;
     @Column(name = "city")
     private String city;
-    @Column(name = "county")
-    private String county;
+    @Column(name = "country")
+    private String country;
     @Column(name = "post_code")
     private String postCode;
 }
