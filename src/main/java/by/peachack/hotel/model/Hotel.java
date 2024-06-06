@@ -2,6 +2,7 @@ package by.peachack.hotel.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Generated;
 
 import java.util.List;
 
@@ -11,9 +12,12 @@ import java.util.List;
 public class Hotel {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "name")
     private String name;
+    @Column(name = "description")
+    private String description;
     @Column(name = "brand")
     private String brand;
     @Embedded

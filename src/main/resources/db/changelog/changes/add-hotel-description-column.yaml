@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: PeaChack
+      changes:
+        - addColumn:
+            tableName: hotel
+            columns:
+              - column:
+                 type: varchar(255)
+                 name: description
