@@ -3,6 +3,7 @@ package by.peachack.hotel.service;
 import by.peachack.hotel.dto.HotelSearchCriteria;
 import by.peachack.hotel.exception.HotelNotFoundException;
 import by.peachack.hotel.model.Amenity;
+import by.peachack.hotel.model.HistogramResult;
 import by.peachack.hotel.model.Hotel;
 import by.peachack.hotel.repository.AmenityRepository;
 import by.peachack.hotel.repository.HotelRepository;
@@ -10,6 +11,7 @@ import by.peachack.hotel.specification.HotelSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -52,7 +54,28 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public Map<String, Integer> getHistogram(String param) {
-        throw new UnsupportedOperationException();
+    public Map<String, Long> getHistogram(String param) {
+        List<HistogramResult> histogramResults;
+        switch (param) {
+            case "city": {
+                histogramResults = hotelRepository.countByAddressCity();
+                break;
+            }
+            case "brand": {
+                histogramResults = hotelRepository.countByBrand();
+                break;
+            }
+            case "country": {
+                histogramResults = hotelRepository.countByAddressCountry();
+                break;
+            }
+            case "amenities": {
+                histogramResults = hotelRepository.countByAmenities();
+                break;
+            }
+            default:
+                throw new IllegalArgumentException(String.format("Unknown argument %s", param));
+        }
+        return histogramResults.stream().collect(Collectors.toMap(HistogramResult::getKey, HistogramResult::getNumber));
     }
 }

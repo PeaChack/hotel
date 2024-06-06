@@ -14,5 +14,5 @@ public interface HotelService {
     Hotel saveHotel(Hotel hotel);
     Hotel saveHotelAmenities(Integer id, List<Amenity> amenities);
     List<Hotel> searchHotel(HotelSearchCriteria hotelSearchCriteria);
-    Map<String, Integer> getHistogram(String param);
+    Map<String, Long> getHistogram(String param);
 }
