@@ -5,6 +5,7 @@ import by.peachack.hotel.dto.HotelSearchCriteria;
 import by.peachack.hotel.model.Amenity;
 import by.peachack.hotel.model.Hotel;
 import jakarta.persistence.criteria.*;
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
+@EqualsAndHashCode
 public class HotelSpecification implements Specification<Hotel> {
     private final HotelSearchCriteria criteria;
 

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,8 +42,17 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Hotel saveHotelAmenities(Integer id, List<Amenity> amenities) {
         Hotel hotel = hotelRepository.findById(id).orElseThrow(() -> new HotelNotFoundException(id));
-        List<Amenity> updatedAmenities = amenities.stream().map(amenity -> amenityRepository.findByName(amenity.getName())
-                        .orElseGet(() -> amenityRepository.save(amenity)))
+
+        Set<String> amenityNames = amenities.stream()
+                .map(Amenity::getName)
+                .collect(Collectors.toSet());
+        List<Amenity> existingAmenities = amenityRepository.findByNameIn(amenityNames);
+        Map<String, Amenity> existingAmenitiesMap = existingAmenities.stream()
+                .collect(Collectors.toMap(Amenity::getName, Function.identity()));
+        List<Amenity> updatedAmenities = amenities.stream()
+                .map(amenity -> existingAmenitiesMap.computeIfAbsent(
+                        amenity.getName(),
+                        name -> amenityRepository.save(amenity)))
                 .collect(Collectors.toList());
         hotel.setAmenities(updatedAmenities);
         return hotelRepository.save(hotel);

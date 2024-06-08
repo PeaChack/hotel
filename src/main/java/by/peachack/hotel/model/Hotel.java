@@ -1,14 +1,17 @@
 package by.peachack.hotel.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Generated;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "hotel")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Hotel {
     @Id
     @Column(name = "id")
