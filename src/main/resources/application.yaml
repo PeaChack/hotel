@@ -27,15 +27,3 @@ springdoc:
     path: /swagger-ui.html
     operationsSorter: method
     tagsSorter: alpha
-  info:
-    title: Hotel API
-    description: Documentation of Hotel API
-    version: 1.0
-    termsOfService: http://swagger.io/terms/
-    contact:
-      name: Dmitry Bulyha
-      url: https://github.com/PeaChack
-      email: dev.peachack@gmail.com
-    license:
-      name: Apache 2.0
-      url: http://springdoc.org
