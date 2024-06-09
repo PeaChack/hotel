@@ -20,7 +20,7 @@ public class Address {
     private String city;
     @Column(name = "country")
     private String country;
-    @Pattern(regexp = "^\\d+$", message = "Post code must consist of numbers")
+    @Pattern(regexp = "^\\d{5,10}$", message = "Post code must consist of numbers")
     @Column(name = "post_code")
     private String postCode;
 }
