@@ -1,6 +1,9 @@
 package by.peachack.hotel.controller;
 
 import by.peachack.hotel.service.HotelService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class HistogramController {
     private final HotelService hotelService;
+    @Operation(summary = "Get histogram by parameter",
+            description = "Retrieve histogram data based on the provided parameter.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Histogram data successfully retrieved"),
+            @ApiResponse(responseCode = "404", description = "Histogram data not found")
+    })
     @GetMapping("/{param}")
     Map<String, Long> getHistogram(@PathVariable String param) {
         return hotelService.getHistogram(param);
