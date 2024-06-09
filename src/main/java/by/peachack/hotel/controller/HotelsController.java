@@ -7,6 +7,9 @@ import by.peachack.hotel.mapper.HotelMapper;
 import by.peachack.hotel.model.Amenity;
 import by.peachack.hotel.model.Hotel;
 import by.peachack.hotel.service.HotelService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,14 +35,14 @@ public class HotelsController {
     }
 
     @PostMapping
-    HotelSummaryDTO saveHotel(@RequestBody HotelPostDTO hotelPostDTO) {
+    HotelSummaryDTO saveHotel(@Valid @RequestBody HotelPostDTO hotelPostDTO) {
         Hotel hotelToSave = hotelMapper.mapToDetailedDTO(hotelPostDTO);
         Hotel savedHotel = hotelService.saveHotel(hotelToSave);
         return hotelMapper.mapToSummaryDTO(savedHotel);
     }
 
     @PostMapping("/{id}/amenities")
-    HotelSummaryDTO saveHotelAmenities(@PathVariable Integer id, @RequestBody List<String> amenities) {
+    HotelSummaryDTO saveHotelAmenities(@PathVariable Integer id, @RequestBody List<@NotEmpty String> amenities) {
         List<Amenity> amenityList = amenities.stream().map(Amenity::new).collect(Collectors.toList());
         return hotelMapper.mapToSummaryDTO(hotelService.saveHotelAmenities(id, amenityList));
     }
