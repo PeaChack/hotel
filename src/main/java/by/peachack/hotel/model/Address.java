@@ -2,6 +2,7 @@ package by.peachack.hotel.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Address {
     private String city;
     @Column(name = "country")
     private String country;
+    @Pattern(regexp = "^\\d+$", message = "Post code must consist of numbers")
     @Column(name = "post_code")
     private String postCode;
 }

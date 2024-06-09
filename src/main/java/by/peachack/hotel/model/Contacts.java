@@ -2,6 +2,7 @@ package by.peachack.hotel.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 @Data
@@ -9,6 +10,7 @@ import lombok.Data;
 public class Contacts {
     @Column(name = "phone")
     private String phone;
+    @Email(message = "Email should be valid")
     @Column(name = "email")
     private String email;
 }
